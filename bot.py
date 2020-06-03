@@ -101,18 +101,19 @@ async def on_message(message):
     if message.author == bot.user:
         return
     if message.content.startswith(f"{prefix}"):
-        return
+        pass
+    else:
     
-    forbidden_words_channel = bot.get_channel(662805385408937984)
-    forbidden_words_list = await forbidden_words_channel.history(limit=100).flatten()
-    arr = []
-    for i in forbidden_words_list:
-        arr.append(i.content)
-    check = check_stupid(message.content.lower(), arr)
-    if check:
-        await message.channel.send("no u")
+        forbidden_words_channel = bot.get_channel(662805385408937984)
+        forbidden_words_list = await forbidden_words_channel.history(limit=100).flatten()
+        arr = []
+        for i in forbidden_words_list:
+            arr.append(i.content)
+        check = check_stupid(message.content.lower(), arr)
+        if check:
+            await message.channel.send("no u")
 
-    await bot.process_commands(message)
+        await bot.process_commands(message)
 
 
 bot.run(token)
