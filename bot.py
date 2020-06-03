@@ -98,7 +98,7 @@ async def spm(ctx, *args):
 #Events
 @bot.event
 async def on_message(message):
-    if message.author == bot.user or message.content.startswith(f"{prefix}"):
+    if message.author == bot.user:
         return
 
     check = check_stupid(message.content.lower(), forbidden_words_list)
