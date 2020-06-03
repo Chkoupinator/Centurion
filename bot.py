@@ -20,6 +20,7 @@ async def sh(ctx, *args):
     await ctx.send(ctx.message.author.mention)
     await ctx.send(embed=embed)
 
+
 @bot.command()
 async def sh2(ctx, *args):
     search_term = " ".join(args)
