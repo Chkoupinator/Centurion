@@ -100,7 +100,7 @@ async def spm(ctx, *args):
 async def on_message(message):
     if message.author == bot.user:
         return
-    forbidden_words_channel = bot.channels.get(662805385408937984)
+    forbidden_words_channel = bot.get_channel(662805385408937984)
     forbidden_words_list = await forbidden_words_channel.history(limit=100).flatten()
     check = check_stupid(message.content.lower(), forbidden_words_list)
     if check:
