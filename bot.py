@@ -3,8 +3,11 @@ from discord.ext import commands
 import time
 from functions import get_url, get_url_v2, check_stupid
 
+
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
 bot = commands.Bot(command_prefix='$')
+forbidden_words_list = []
+
 
 #Commands
 @bot.command()
@@ -95,16 +98,23 @@ async def spm(ctx, *args):
 
 #Events
 @bot.event
+async def on_redy():
+    forbidden_words_channel = bot.channels.get(662805385408937984)
+    forbidden_words_list = await forbidden_words_channel.history(limit=100).flatten()
+    for i in forbidden_words_list:
+        print(i)
+
+
+@bot.event
 async def on_message(message):
     if message.author == bot.user:
         return
 
-    check = check_stupid(message.content.lower(), ["gay"])
+    check = check_stupid(message.content.lower(), forbidden_words_list)
     if check:
         await message.channel.send("no u")
 
     await bot.process_commands(message)
-
 
 
 bot.run(token)
