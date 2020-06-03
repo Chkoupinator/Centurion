@@ -96,6 +96,9 @@ async def spm(ctx, *args):
 #Events
 @bot.event
 async def on_message(message):
+    if message.author == bot.user:
+        return
+
     if message.content.startswith('gay'):
         await message.channel.send("no u")
 
