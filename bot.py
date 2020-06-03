@@ -63,9 +63,22 @@ async def tf(ctx):
 
 
 @bot.command()
+async def nice(ctx):
+    for i in range(0, 5):
+        await ctx.send("n i c e")
+
+
+@bot.command()
+async def gay(ctx):
+    for i in range(0, 5):
+        await ctx.send("gEy")
+
+
+@bot.command()
 async def spm(ctx, *args):
     string = " ".join(args)
     for j in range(0, 5):
         await ctx.send(string)
+
 
 bot.run(token)
