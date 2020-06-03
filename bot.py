@@ -96,8 +96,8 @@ async def spm(ctx, *args):
 #Events
 @bot.event
 async def on_message(message):
-    if message.content.upper().startswith('N****'):
-        await bot.send_message(message.channel, "Please do not use that word here.")
+    if message.content.upper().startswith('gay'):
+        await bot.send_message(message.channel, "no u")
 
     await bot.process_commands(message)
 
