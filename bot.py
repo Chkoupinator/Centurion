@@ -101,7 +101,7 @@ async def on_message(message):
 
     check = check_stupid(message.content, ["gay"])
     if check:
-        await bot.process_commands(message)
+        await bot.process_commands("no u")
 
 
 bot.run(token)
