@@ -1,50 +1,70 @@
 import discord
+from discord.ext import commands
 import time
 from functions import get_url, get_url_v2
 
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
-prefix = "$"
-client = discord.Client()
+bot = commands.Bot(command_prefix='$')
 
 
-@client.event
-async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+@bot.command()
+async def sh(ctx, *args):
+    search_term = " ".join(args)
+    title = "here u go faget"
+    description = f"requested by {ctx.author.display_name}"
+    image_url = get_url(search_term)
+    color = 0xff0000
+    embed = discord.Embed(
+        title=title, description=description, color=color)
+    embed.set_image(url=image_url)
+    await ctx.send(ctx.message.author.mention)
+    await ctx.send(embed=embed)
+
+@bot.command()
+async def sh2(ctx, *args):
+    search_term = " ".join(args)
+    title = "here u go faget"
+    description = f"requested by {ctx.author.display_name}"
+    image_url = get_url_v2(search_term)
+    color = 0xff0000
+    embed = discord.Embed(
+        title=title, description=description, color=color)
+    embed.set_image(url=image_url)
+    await ctx.send(ctx.message.author.mention)
+    await ctx.send(embed=embed)
 
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith(f"{prefix}sho"):
-        channel = message.channel
-        title = "here u go faget"
-        description = f"requested by {message.author.display_name}"
-        image_url = get_url("tits")
-        color = 0xff0000
-        embed = discord.Embed(
-            title=title, description=description, color=color)
-        embed.set_image(url=image_url)
-        await channel.send(embed=embed)
-
-    if message.content.startswith(f"{prefix}spam"):
-        channel = message.channel
-        spammed_users = message.mentions
-        for i in spammed_users:
+@bot.command()
+async def spem(ctx):
+    spammed_roles = ctx.message.role_mentions
+    for i in spammed_roles:
+        if ctx.message.author.top_role.position >= i.position:
             msg = i.mention
-            for j in range(0, 10):
-                await channel.send(msg)
+            for j in range(0, 5):
+                await ctx.send(msg)
+        else:
+            pass
 
-    if message.content.startswith(f"{prefix}spam role"):
-        channel = message.channel
-        spammed_roles = message.role_mentions
-        for i in spammed_roles:
-            if message.author.top_role.position >= i.position:
-                msg = i.mention
-                for j in range(0, 10):
-                    await channel.send(msg)
-            else:
-                pass
 
-client.run(token)
+@bot.command()
+async def spam(ctx):
+    spammed_users = ctx.message.mentions
+    for i in spammed_users:
+        msg = i.mention
+        for j in range(0, 5):
+            await ctx.send(msg)
+
+
+@bot.command()
+async def tf(ctx):
+    for i in range(0, 5):
+        await ctx.send("tf")
+
+
+@bot.command()
+async def spm(ctx, *args):
+    string = " ".join(args)
+    for j in range(0, 5):
+        await ctx.send(string)
+
+bot.run(token)
