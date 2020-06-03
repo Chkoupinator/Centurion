@@ -6,7 +6,7 @@ from functions import get_url, get_url_v2, check_stupid
 prefix = '$'
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
 bot = commands.Bot(command_prefix=prefix)
-
+forbidden_words_list = ["clio", "ibiza"]
 
 #Commands
 @bot.command()
@@ -98,22 +98,14 @@ async def spm(ctx, *args):
 #Events
 @bot.event
 async def on_message(message):
-    if message.author == bot.user:
+    if message.author == bot.user or message.content.startswith(f"{prefix}"):
         return
-    if message.content.startswith(f"{prefix}"):
-        pass
-    else:
-    
-        forbidden_words_channel = bot.get_channel(662805385408937984)
-        forbidden_words_list = await forbidden_words_channel.history(limit=100).flatten()
-        arr = []
-        for i in forbidden_words_list:
-            arr.append(i.content)
-        check = check_stupid(message.content.lower(), arr)
-        if check:
-            await message.channel.send("no u")
 
-        await bot.process_commands(message)
+    check = check_stupid(message.content.lower(), forbidden_words_list)
+    if check:
+        await message.channel.send("no u")
+
+    await bot.process_commands(message)
 
 
 bot.run(token)
