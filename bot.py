@@ -101,9 +101,10 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    check = check_stupid(message.content.lower(), forbidden_words_list)
-    if check:
-        await message.channel.send("no u")
+    if not message.content.startswith(prefix):
+        check = check_stupid(message.content.lower(), forbidden_words_list)
+        if check:
+            await message.channel.send("no u")
 
     await bot.process_commands(message)
 
