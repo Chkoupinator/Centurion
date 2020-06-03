@@ -96,14 +96,11 @@ async def spm(ctx, *args):
 #Events
 @bot.event
 async def on_message(message):
-    if message.author == bot.user:
-        return
+    if message.content.upper().startswith('N****'):
+        await bot.send_message(message.channel, "Please do not use that word here.")
 
-    check = check_stupid(message.content, ["gay"])
-    if check:
-        await message.channel.send('no u')
-    
     await bot.process_commands(message)
+
 
 
 bot.run(token)
