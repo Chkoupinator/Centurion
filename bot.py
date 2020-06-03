@@ -1,12 +1,12 @@
 import discord
 from discord.ext import commands
 import time
-from functions import get_url, get_url_v2
+from functions import get_url, get_url_v2, check_stupid
 
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
 bot = commands.Bot(command_prefix='$')
 
-
+#Commands
 @bot.command()
 async def sh(ctx, *args):
     if ctx.message.channel.is_nsfw():
@@ -91,6 +91,17 @@ async def spm(ctx, *args):
     string = " ".join(args)
     for j in range(0, 5):
         await ctx.send(string)
+
+
+#Events
+@bot.event
+async def on_message(message):
+    if message.author == bot.user:
+        return
+
+    check = check_stupid(message.content, ["gay"])
+    if check:
+        await message.channel.send('no u!')
 
 
 bot.run(token)

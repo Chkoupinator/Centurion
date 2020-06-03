@@ -40,6 +40,6 @@ def get_url_v2(arg):
     return random.choice(links)
 
 
-def check_stupid(word, list):
-    res = any(ele in word for ele in list)
+def check_stupid(message, word_list):
+    res = any(ele in message for ele in word_list)
     return res
