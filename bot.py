@@ -64,8 +64,9 @@ async def spam(ctx):
 
 @bot.command()
 async def tf(ctx):
+    msg_author = ctx.message.channel.last_message.author
     for i in range(0, 5):
-        await ctx.send("tf")
+        await ctx.send(f"{msg_author.mention} tf")
 
 
 @bot.command()
