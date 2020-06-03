@@ -101,8 +101,8 @@ async def spm(ctx, *args):
 async def on_redy():
     forbidden_words_channel = bot.channels.get(662805385408937984)
     forbidden_words_list = await forbidden_words_channel.history(limit=100).flatten()
-    for i in forbidden_words_list:
-        print(i)
+    
+    print('logged in as {0.user}'.format(bot))
 
 
 @bot.event
