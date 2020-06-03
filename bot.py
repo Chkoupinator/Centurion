@@ -93,10 +93,4 @@ async def spm(ctx, *args):
         await ctx.send(string)
 
 
-#Events
-@bot.event
-async def on_message(message):
-    await bot.process_commands("gay")
-
-
 bot.run(token)
