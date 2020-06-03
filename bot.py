@@ -1,6 +1,6 @@
 import discord
 import time
-from functions import get_url
+from functions import get_url, get_url_v2
 
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
 prefix = "$"
