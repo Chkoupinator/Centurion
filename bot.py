@@ -99,7 +99,8 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if message.content.startswith('gay'):
+    check = check_stupid(message.content.lower(), ["gay"])
+    if check:
         await message.channel.send("no u")
 
     await bot.process_commands(message)
