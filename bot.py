@@ -71,14 +71,16 @@ async def tf(ctx):
 
 @bot.command()
 async def nice(ctx):
+    msg_author = ctx.message.channel.last_message.author
     for i in range(0, 5):
-        await ctx.send("n i c e")
+        await ctx.send(f"{msg_author.mention} n i c e")
 
 
 @bot.command()
 async def gay(ctx):
+    msg_author = ctx.message.channel.last_message.author
     for i in range(0, 5):
-        await ctx.send("gEy")
+        await ctx.send(f"{msg_author.mention} g a y")
 
 
 @bot.command()
