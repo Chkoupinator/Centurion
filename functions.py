@@ -38,3 +38,8 @@ def get_url_v2(arg):
 
     links = links[7:-5]
     return random.choice(links)
+
+
+def check_stupid(word, list):
+    res = any(ele in word for ele in list)
+    return res

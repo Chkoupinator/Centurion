@@ -9,30 +9,36 @@ bot = commands.Bot(command_prefix='$')
 
 @bot.command()
 async def sh(ctx, *args):
-    search_term = " ".join(args)
-    title = "here u go faget"
-    description = f"requested by {ctx.author.display_name}"
-    image_url = get_url(search_term)
-    color = 0xff0000
-    embed = discord.Embed(
-        title=title, description=description, color=color)
-    embed.set_image(url=image_url)
-    await ctx.send(ctx.message.author.mention)
-    await ctx.send(embed=embed)
+    if ctx.message.channel.is_nsfw():
+        search_term = " ".join(args)
+        title = "here u go faget"
+        description = f"requested by {ctx.author.display_name}"
+        image_url = get_url(search_term)
+        color = 0xff0000
+        embed = discord.Embed(
+            title=title, description=description, color=color)
+        embed.set_image(url=image_url)
+        await ctx.send(ctx.message.author.mention)
+        await ctx.send(embed=embed)
+    else:
+        await ctx.send(f"{ctx.message.author.mention} you need to be in an nsfw channel")
 
 
 @bot.command()
 async def sh2(ctx, *args):
-    search_term = " ".join(args)
-    title = "here u go faget"
-    description = f"requested by {ctx.author.display_name}"
-    image_url = get_url_v2(search_term)
-    color = 0xff0000
-    embed = discord.Embed(
-        title=title, description=description, color=color)
-    embed.set_image(url=image_url)
-    await ctx.send(ctx.message.author.mention)
-    await ctx.send(embed=embed)
+    if ctx.message.channel.is_nsfw():
+        search_term = " ".join(args)
+        title = "here u go faget"
+        description = f"requested by {ctx.author.display_name}"
+        image_url = get_url_v2(search_term)
+        color = 0xff0000
+        embed = discord.Embed(
+            title=title, description=description, color=color)
+        embed.set_image(url=image_url)
+        await ctx.send(ctx.message.author.mention)
+        await ctx.send(embed=embed)
+    else:
+        await ctx.send(f"{ctx.message.author.mention} you need to be in an nsfw channel")
 
 
 @bot.command()
