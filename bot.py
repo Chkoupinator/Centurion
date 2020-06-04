@@ -103,7 +103,7 @@ async def on_message(message):
 
     if not message.content.startswith(prefix):
         forbidden_words_channel = bot.get_channel(662805385408937984)
-        arr = await forbidden_words_channel.history(limit=2).flatten()
+        arr = await forbidden_words_channel.history(limit=100).flatten()
         forbidden_words_list = []
         for i in arr:
             forbidden_words_list.append(i.content)
