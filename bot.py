@@ -102,9 +102,11 @@ async def on_message(message):
         return
 
     if not message.content.startswith(prefix):
+        forbidden_words_channel = await bot.get_channel(662805385408937984)
+        messages = await forbidden_words_channel.history(limit=2).flatten()
         check = check_stupid(message.content.lower(), forbidden_words_list)
         if check:
-            await message.channel.send("no u")
+            await message.channel.send(f"{message.author.mention}  G A Y")
 
     await bot.process_commands(message)
 
