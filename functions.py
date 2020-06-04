@@ -41,5 +41,6 @@ def get_url_v2(arg):
 
 
 def check_stupid(message, word_list):
+    message = message + " "
     res = any(ele in message for ele in word_list)
     return res
