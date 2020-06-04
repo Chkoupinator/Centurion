@@ -98,7 +98,7 @@ async def spm(ctx, *args):
 #Events
 @bot.event
 async def on_message(message):
-    if message.author == bot.user or message.channel == forbidden_words_channel:
+    if message.author == bot.user or (message.channel.id == forbidden_words_channel.id):
         return
 
     if not message.content.startswith(prefix):
