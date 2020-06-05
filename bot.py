@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import time
-from functions import get_url, get_url_v2, check_stupid, get_joke
+from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_joke
 
 prefix = '$'
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
@@ -15,6 +15,23 @@ async def sh(ctx, *args):
         title = "here u go faget"
         description = f"requested by {ctx.author.display_name}"
         image_url = get_url(search_term)
+        color = 0xff0000
+        embed = discord.Embed(
+            title=title, description=description, color=color)
+        embed.set_image(url=image_url)
+        await ctx.send(ctx.message.author.mention)
+        await ctx.send(embed=embed)
+    else:
+        await ctx.send(f"{ctx.message.author.mention} you need to be in an nsfw channel")
+
+
+@bot.command()
+async def shr(ctx, *args):
+    if ctx.message.channel.is_nsfw():
+        search_term = " ".join(args)
+        title = "here u go faget"
+        description = f"requested by {ctx.author.display_name}"
+        image_url = get_url_v3(search_term)
         color = 0xff0000
         embed = discord.Embed(
             title=title, description=description, color=color)

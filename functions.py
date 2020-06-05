@@ -40,6 +40,26 @@ def get_url_v2(arg):
     return random.choice(links)
 
 
+def get_url_v3(arg):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:67.0) Gecko/20100101 Firefox/67.0"}
+
+    search = arg.replace(" ", "+")
+    url = f"https://www.pornpics.com/?q={search}&date=latest"
+    page = requests.get(url, headers=headers)
+    soup = bs(page.content, "lxml")
+    links = []
+
+    imgs = soup.find_all('img')
+    imgs.pop(0)
+    imgs.pop(0)
+    for i in imgs:
+        links.append(i['data-src'])
+
+    return random.choice(links)
+
+
+
 def get_joke():
     jokes = [
         "Your ass must be pretty jealous of all the shit that comes out of your mouth",
