@@ -40,6 +40,29 @@ def get_url_v2(arg):
     return random.choice(links)
 
 
+def get_joke():
+    jokes = [
+        "Your ass must be pretty jealous of all the shit that comes out of your mouth",
+        "Remember when I asked for your opinion? Me neither",
+        "If you’re waiting for me to care, I hope you brought something to eat, ‘cause it’s gonna be a really long time",
+        "Some day you’ll go far and I really hope you stay there",
+        "I’m trying my absolute hardest to see things from your perspective, but I just can’t get my head that far up my ass",
+        " Sometimes it’s better to keep your mouth shut and give the impression that you’re stupid than open it and remove all doubt",
+        "You only annoy me when you’re breathing, really",
+        "Do yourself a favor and ignore anyone who tells you to be yourself. Bad idea in your case",
+        "I don’t know what your problem is, but I’m guessing it’s hard to pronounce",
+        "Do your parents even realize they’re living proof that two wrongs don’t make a right?",
+        "Remember that time I said I thought you were cool? I lied",
+        "I can’t help imagining how much awesomer the world would be if your dad had just pulled out",
+        "Everyone’s entitled to act stupid once in awhile, but you really abuse the privilege",
+        "Do you ever wonder what life would be like if you’d gotten enough oxygen at birth?",
+        "Please, save your breath. You’ll probably need it to blow up your next date",
+        "Can you die of constipation? I ask because I’m worried about how full of shit you are",
+    ]
+
+    return random.choice(jokes)
+
+
 def check_stupid(message, word_list):
     res = any(ele in message for ele in word_list)
     return res

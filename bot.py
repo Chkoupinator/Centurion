@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import time
-from functions import get_url, get_url_v2, check_stupid
+from functions import get_url, get_url_v2, check_stupid, get_joke
 
 prefix = '$'
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
@@ -108,7 +108,8 @@ async def on_message(message):
             forbidden_words_list.append(i.content)
         check = check_stupid(message.content.lower(), forbidden_words_list)
         if check:
-            await message.channel.send(f"{message.author.mention}  G A Y")
+            joke = get_joke()
+            await message.channel.send(f"{joke} {message.author.mention}")
 
     await bot.process_commands(message)
 
