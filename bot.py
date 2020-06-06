@@ -22,7 +22,7 @@ async def sh(ctx, *args):
         await ctx.send(ctx.message.author.mention)
         await ctx.send(embed=embed)
     else:
-        await ctx.send(f"{ctx.message.author.mention} you need to be in an nsfw channel")
+        await ctx.send(f"{ctx.message.author.mention} no")
 
 
 @bot.command()
@@ -39,7 +39,7 @@ async def shr(ctx, *args):
         await ctx.send(ctx.message.author.mention)
         await ctx.send(embed=embed)
     else:
-        await ctx.send(f"{ctx.message.author.mention} you need to be in an nsfw channel")
+        await ctx.send(f"{ctx.message.author.mention} no")
 
 
 @bot.command()
@@ -56,7 +56,7 @@ async def sh2(ctx, *args):
         await ctx.send(ctx.message.author.mention)
         await ctx.send(embed=embed)
     else:
-        await ctx.send(f"{ctx.message.author.mention} you need to be in an nsfw channel")
+        await ctx.send(f"{ctx.message.author.mention} no")
 
 
 @bot.command()
