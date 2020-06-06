@@ -106,5 +106,8 @@ def get_joke():
 
 
 def check_stupid(message, word_list):
-    res = any(ele in message for ele in word_list)
+    message = message.split()
+    res = False
+    if len(list(set(word_list).intersection(message))) > 0:
+        res = True
     return res
