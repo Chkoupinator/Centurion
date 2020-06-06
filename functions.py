@@ -59,7 +59,6 @@ def get_url_v3(arg):
     return random.choice(links)
 
 
-
 def get_joke():
     jokes = [
         "Your ass must be pretty jealous of all the shit that comes out of your mouth",
@@ -106,6 +105,11 @@ def get_joke():
 
 
 def check_stupid(message, word_list):
+    if message[0] == "*":
+        message = message[2:]
+    if message[-1] == "*":
+        message = message[:-2]
+
     message = message.split()
     res = False
     if len(list(set(word_list).intersection(message))) > 0:
