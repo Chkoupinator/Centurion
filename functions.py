@@ -108,7 +108,7 @@ def check_stupid(message, word_list):
 
     while message[0] == "*" or message[0] == " ":
         message = message[1:]
-    while message[-1] == "*" or message[0] == " ":
+    while message[-1] == "*" or message[-1] == " ":
         message = message[:-1]
 
     message = message.split()
