@@ -105,10 +105,9 @@ def get_joke():
 
 
 def check_stupid(message, word_list):
-    if message[0] == "*":
-        message = message[2:]
-    if message[-1] == "*":
-        message = message[:-2]
+    
+    while message[0] == "*" and message[-1] == "*":
+        message = message[1:-1]
 
     message = message.split()
     res = False
