@@ -105,11 +105,11 @@ def get_joke():
 
 
 def check_stupid(message, word_list):
-    for i in message:
-        while i[0] == "*" or i[0] == " ":
-            i = i[1:]
-        while i[-1] == "*" or i[-1] == " ":
-            i = i[:-1]
+    
+    while message[0] == "*" or message[0] == " ":
+        message = message[1:]
+    while message[-1] == "*" or message[-1] == " ":
+        message = message[:-1]
 
     message = message.split()
     res = False
