@@ -123,6 +123,11 @@ async def delete(ctx, arg):
 
 #Events
 @bot.event
+async def on_ready():
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the glory of ROME"))
+
+
+@bot.event
 async def on_message(message):
     if message.author == bot.user:
         return
