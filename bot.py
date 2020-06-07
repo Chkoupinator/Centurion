@@ -124,7 +124,7 @@ async def delete(ctx, arg):
 #Events
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the glory of ROME"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.Custom, name="The glory of ROME is forever"))
 
 
 @bot.event
