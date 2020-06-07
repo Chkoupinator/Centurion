@@ -105,6 +105,14 @@ async def gay(ctx):
 
 
 @bot.command()
+async def bruh(ctx):
+    messages = await ctx.channel.history(limit=2).flatten()
+    msg_author = messages[1].author
+    for i in range(0, 5):
+        await ctx.send(f"{msg_author.mention} b r u h")
+
+
+@bot.command()
 async def spm(ctx, *args):
     string = " ".join(args)
     for j in range(0, 5):
@@ -124,7 +132,7 @@ async def delete(ctx, arg):
 @bot.command()
 async def pp(ctx, arg=None):
     usr = ctx.message.author
-    
+
     if arg is not None:
         usr = ctx.message.mentions[0]
 
