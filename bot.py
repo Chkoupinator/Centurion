@@ -126,7 +126,7 @@ async def pp(ctx, arg=None):
     usr = ctx.message.author
     
     if arg is not None:
-        usr = ctx.message.mentions
+        usr = ctx.message.mentions[0]
 
     response = check_pp_size()
     pp = response[0]
