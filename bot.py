@@ -122,7 +122,7 @@ async def delete(ctx, arg):
 
 
 @bot.command()
-async def pp(ctx, arg):
+async def pp(ctx, arg=None):
     usr = ctx.message.author
     
     if arg is not None:
