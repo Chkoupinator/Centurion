@@ -147,6 +147,3 @@ def check_pp_size():
 
     out = [pp, joke]
     return out
-
-
-print(get_dad_joke())
