@@ -111,6 +111,17 @@ async def spm(ctx, *args):
         await ctx.send(string)
 
 
+@bot.command()
+async def delete(ctx, arg):
+    messages = await ctx.channel.history(limit=arg).flatten()
+    if ctx.message.author.permissions_in(ctx.message.channel).manage_messages:
+        for i in messages:
+            i.delete()
+        await ctx.send(f"deleted {arg} messages!")
+    else:
+        await ctx.send("nO")
+
+
 #Events
 @bot.event
 async def on_message(message):
