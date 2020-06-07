@@ -116,7 +116,7 @@ async def delete(ctx, arg):
     messages = await ctx.channel.history(limit=arg).flatten()
     if ctx.message.author.permissions_in(ctx.message.channel).manage_messages:
         for i in messages:
-            i.delete()
+            await i.delete()
         await ctx.send(f"deleted {arg} messages!")
     else:
         await ctx.send("nO")
