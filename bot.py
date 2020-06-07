@@ -158,13 +158,13 @@ async def on_ready():
 
 
 @bot.event
-async def _on_member_join(member):
+async def on_member_join(member):
     channel = bot.get_channel(660663739678195763)
     await channel.send(f"{member.mention} welcome to da clUb reeeeeeeeeee!")
 
 
 @bot.event
-async def _on_member_remove(member):
+async def on_member_remove(member):
     channel = bot.get_channel(659251677865443358)
     await channel.send(f"{member.mention} has left, what a fag lol")
 
