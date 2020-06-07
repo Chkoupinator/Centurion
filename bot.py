@@ -7,7 +7,7 @@ prefix = '$'
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
 bot = commands.Bot(command_prefix=prefix)
 
-#Commands
+# Commands
 @bot.command()
 async def sh(ctx, *args):
     if ctx.message.channel.is_nsfw():
@@ -151,10 +151,22 @@ async def joke(ctx):
     joke = get_dad_joke()
     await ctx.send(joke)
 
-#Events
+# Events
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the glory of ROME"))
+
+
+@bot.event
+async def _on_member_join(member):
+    channel = bot.get_channel(660663739678195763)
+    await channel.send(f"{member.mention} welcome to da clUb reeeeeeeeeee!")
+
+
+@bot.event
+async def _on_member_remove(member):
+    channel = bot.get_channel(659251677865443358)
+    await channel.send(f"{member.mention} has left, what a fag lol")
 
 
 @bot.event
