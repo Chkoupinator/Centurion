@@ -132,7 +132,10 @@ async def pp(ctx, arg=None):
     pp = response[0]
     joke = response[1]
 
-    await ctx.send(f"{usr.mention} your pp is {pp} cm, {joke}")
+    if pp == 0:
+        await ctx.send(f"{usr.mention} has a vagina LMFAO")
+    else:
+        await ctx.send(f"{usr.mention} your pp is {pp} cm, {joke}")
 
 
 @bot.command()
