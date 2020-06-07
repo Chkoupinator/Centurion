@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import time
-from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_joke, check_pp_size
+from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_forbidden_words_joke, check_pp_size, get_dad_joke
 
 prefix = '$'
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
@@ -134,9 +134,11 @@ async def pp(ctx, arg=None):
 
     await ctx.send(f"{usr.mention} your pp is {pp} cm, {joke}")
 
-    
 
-
+@bot.command()
+async def joke(ctx):
+    joke = get_dad_joke()
+    await ctx.send(joke)
 
 #Events
 @bot.event
@@ -157,7 +159,7 @@ async def on_message(message):
             forbidden_words_list.append(i.content)
         check = check_stupid(message.content.lower(), forbidden_words_list)
         if check:
-            joke = get_joke()
+            joke = get_forbidden_words_joke()
             await message.channel.send(f"{joke} {message.author.mention}")
 
     await bot.process_commands(message)
