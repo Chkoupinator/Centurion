@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import time
-from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_joke
+from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_joke, check_pp_size
 
 prefix = '$'
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
@@ -119,6 +119,23 @@ async def delete(ctx, arg):
             await i.delete()
     else:
         await ctx.send("nO")
+
+
+@bot.command()
+async def pp(ctx, arg):
+    usr = ctx.message.author
+    
+    if arg is not None:
+        usr = ctx.message.mentions
+
+    response = check_pp_size()
+    pp = response[0]
+    joke = response[1]
+
+    await ctx.send(f"{usr.mention} your pp is {pp} cm, {joke}")
+
+    
+
 
 
 #Events

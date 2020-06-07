@@ -116,3 +116,23 @@ def check_stupid(message, word_list):
     if len(list(set(word_list).intersection(message))) > 0:
         res = True
     return res
+
+
+def check_pp_size():
+
+    smoll_pp_jokes = ["smoll pp fag", "gay trans", "autistic faggot", "homosexual monkey", "lol u have a tota", "F", "RIP", "virgin fag", "i bet u let ppl fuck u for free", "ever thought of killing yourself ?"]
+    big_pp_jokes   = ["are you black ?", "noice", "bet whamen drill all over dat dick", "not bad", "plz fuck me daddy", "if i had a dick like dat i would never stop fappin", "( ͡ ͡° ͜ ʖ ͡ ͡°)", "Brazzers wants to know your location", "ever considered making porn ?"]
+
+    pp = random.randint(0,20)
+
+    if pp == 0:
+        joke =  "You have a vagina not a pp"
+
+    elif pp <= 15:
+        joke =  smoll_pp_jokes[random.randint(0,len(smoll_pp_jokes))-1]
+    
+    else:
+        joke =  big_pp_jokes[random.randint(0,len(big_pp_jokes))-1]
+
+    out = [pp, joke]
+    return out
