@@ -115,14 +115,12 @@ def get_dad_joke():
 
 def check_stupid(message, word_list):
 
-    try:
-        message.replace("*", "")
-        message.replace(" ", "")
-        message.replace(".", "")
-        message.replace("!", "")
-        message.replace("?", "")
-    except:
-        pass
+    
+    message.replace("*", "")
+    message.replace(" ", "")
+    message.replace(".", "")
+    message.replace("!", "")
+    message.replace("?", "")
 
 
     message = message.split()
