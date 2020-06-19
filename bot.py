@@ -176,8 +176,10 @@ async def unmute(ctx):
         if muted_user == bot.user:
             await ctx.send("***nta ba9lawa***")
         muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
+        plebian_role = discord.utils.get(ctx.guild.roles, name="Plebian")
         if muted_role in muted_user.roles:
             await muted_user.remove_roles(muted_role, reason=None, atomic=True)
+            await muted_user.add_roles(plebian_role, reason=None, atomic=True)
         else:
             await ctx.send("user needs to be muted first!")
     else:
