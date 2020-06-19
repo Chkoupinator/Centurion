@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import time
-from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_forbidden_words_joke, check_pp_size, get_dad_joke, read_file, write_file
+from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_forbidden_words_joke, check_pp_size, get_dad_joke
 
 prefix = '$'
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
