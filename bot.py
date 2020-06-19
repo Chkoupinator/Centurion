@@ -151,6 +151,15 @@ async def joke(ctx):
     joke = get_dad_joke()
     await ctx.send(joke)
 
+@bot.command()
+async def mute(ctx, *args):
+    role = 723597435204534332
+    muted = ctx.channel.mentions[0]
+    await ctx.message.user.add_role(role, reason=args[0], atomic=True)
+    
+    
+
+
 # Events
 @bot.event
 async def on_ready():
