@@ -188,7 +188,8 @@ async def unmute(ctx):
 
 @bot.command()
 async def chill(ctx, arg):
-    await ctx.channel.edit(slowmode_delay=int(arg))
+    if ctx.message.author.permissions_in(ctx.message.channel).manage_channels:
+        await ctx.channel.edit(slowmode_delay=int(arg))
 
 # Events
 @bot.event
