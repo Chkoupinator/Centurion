@@ -1,11 +1,12 @@
 import discord
 from discord.ext import commands
 import time
-from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_forbidden_words_joke, check_pp_size, get_dad_joke
+from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_forbidden_words_joke, check_pp_size, get_dad_joke, read_file, write_file
 
 prefix = '$'
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
 bot = commands.Bot(command_prefix=prefix)
+
 
 # Commands
 @bot.command()
@@ -65,7 +66,7 @@ async def spem(ctx):
     for i in spammed_roles:
         if ctx.message.author.top_role.position >= i.position:
             msg = i.mention
-            for j in range(0, 5):
+            for j in range(0, ctx.message.author.top_role.position):
                 await ctx.send(msg)
         else:
             pass
@@ -76,7 +77,7 @@ async def spam(ctx):
     spammed_users = ctx.message.mentions
     for i in spammed_users:
         msg = i.mention
-        for j in range(0, 5):
+        for j in range(0, ctx.message.author.top_role.position):
             await ctx.send(msg)
 
 
@@ -84,7 +85,7 @@ async def spam(ctx):
 async def tf(ctx):
     messages = await ctx.channel.history(limit=2).flatten()
     msg_author = messages[1].author
-    for i in range(0, 5):
+    for i in range(0, ctx.message.author.top_role.position):
         await ctx.send(f"{msg_author.mention} tf")
 
 
@@ -92,7 +93,7 @@ async def tf(ctx):
 async def nice(ctx):
     messages = await ctx.channel.history(limit=2).flatten()
     msg_author = messages[1].author
-    for i in range(0, 5):
+    for i in range(0, ctx.message.author.top_role.position):
         await ctx.send(f"{msg_author.mention} n i c e")
 
 
@@ -100,7 +101,7 @@ async def nice(ctx):
 async def gay(ctx):
     messages = await ctx.channel.history(limit=2).flatten()
     msg_author = messages[1].author
-    for i in range(0, 5):
+    for i in range(0, ctx.message.author.top_role.position):
         await ctx.send(f"{msg_author.mention} g a y")
 
 
@@ -108,14 +109,14 @@ async def gay(ctx):
 async def bruh(ctx):
     messages = await ctx.channel.history(limit=2).flatten()
     msg_author = messages[1].author
-    for i in range(0, 5):
+    for i in range(0, ctx.message.author.top_role.position):
         await ctx.send(f"{msg_author.mention} b r u h")
 
 
 @bot.command()
 async def spm(ctx, *args):
     string = " ".join(args)
-    for j in range(0, 5):
+    for j in range(0, ctx.message.author.top_role.position):
         await ctx.send(string)
 
 
@@ -126,7 +127,7 @@ async def delete(ctx, arg):
         for i in messages:
             await i.delete()
     else:
-        await ctx.send("nO")
+        await ctx.send("<:harold:718791729398022184>")
 
 
 @bot.command()
@@ -151,13 +152,38 @@ async def joke(ctx):
     joke = get_dad_joke()
     await ctx.send(joke)
 
+
 @bot.command()
-async def mute(ctx, *args):
-    role = "723597435204534332"
-    muted = ctx.message.mentions[0]
-    await muted.add_roles(role, reason=args[0], atomic=True)
-    
-    
+async def mute(ctx):
+    muted_user = ctx.message.mentions[0]
+
+    if muted_user == bot.user:
+        await ctx.send("<:tucker:720181645919125535>")
+
+    if ctx.message.author.top_role.position > muted_user.top_role.position and ctx.message.author.permissions_in(ctx.message.channel).manage_roles:
+        muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
+        muted_user_roles = muted_user.roles[1:]
+        for role in muted_user_roles:
+            await muted_user.remove_roles(role, reason=None, atomic=True)
+
+        await muted_user.add_roles(muted_role, reason=None, atomic=True)
+    else:
+        await ctx.send("<:harold:718791729398022184>")
+
+
+@bot.command()
+async def unmute(ctx):
+    if ctx.message.author.permissions_in(ctx.message.channel).manage_roles:
+        muted_user = ctx.message.mentions[0]
+        if muted_user == bot.user:
+            await ctx.send("***nta ba9lawa***")
+        muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
+        if muted_role in muted_user.roles:
+            await muted_user.remove_roles(muted_role, reason=None, atomic=True)
+        else:
+            await ctx.send("user needs to be muted first!")
+    else:
+        await ctx.send("<:harold:718791729398022184>")
 
 
 # Events
