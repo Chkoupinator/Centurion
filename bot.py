@@ -192,7 +192,7 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    role = discord.utils.get(bot.guild.roles, name="Plebian")
+    role = discord.utils.get(member.guild.roles, name="Plebian")
     channel = bot.get_channel(659251677865443358)
     await member.add_roles(role, reason=None, atomic=True)
     await channel.send(f"{member.mention} welcome to da clUb reeeeeeeeeee!")
