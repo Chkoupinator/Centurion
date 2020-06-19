@@ -186,6 +186,10 @@ async def unmute(ctx):
         await ctx.send("<:harold:718791729398022184>")
 
 
+@bot.command()
+async def chill(ctx, arg):
+    await ctx.message.channel.slowmode_delay(int(arg))
+
 # Events
 @bot.event
 async def on_ready():
