@@ -66,7 +66,7 @@ async def spem(ctx):
     for i in spammed_roles:
         if ctx.message.author.top_role.position >= i.position:
             msg = i.mention
-            for j in range(0, ctx.message.author.top_role.position):
+            for j in range(0, (ctx.message.author.top_role.position - 5)):
                 await ctx.send(msg)
         else:
             pass
@@ -77,7 +77,7 @@ async def spam(ctx):
     spammed_users = ctx.message.mentions
     for i in spammed_users:
         msg = i.mention
-        for j in range(0, ctx.message.author.top_role.position):
+        for j in range(0, (ctx.message.author.top_role.position - 5)):
             await ctx.send(msg)
 
 
@@ -85,7 +85,7 @@ async def spam(ctx):
 async def tf(ctx):
     messages = await ctx.channel.history(limit=2).flatten()
     msg_author = messages[1].author
-    for i in range(0, ctx.message.author.top_role.position):
+    for i in range(0, (ctx.message.author.top_role.position - 5)):
         await ctx.send(f"{msg_author.mention} tf")
 
 
@@ -93,7 +93,7 @@ async def tf(ctx):
 async def nice(ctx):
     messages = await ctx.channel.history(limit=2).flatten()
     msg_author = messages[1].author
-    for i in range(0, ctx.message.author.top_role.position):
+    for i in range(0, (ctx.message.author.top_role.position - 5)):
         await ctx.send(f"{msg_author.mention} n i c e")
 
 
@@ -101,7 +101,7 @@ async def nice(ctx):
 async def gay(ctx):
     messages = await ctx.channel.history(limit=2).flatten()
     msg_author = messages[1].author
-    for i in range(0, ctx.message.author.top_role.position):
+    for i in range(0, (ctx.message.author.top_role.position - 5)):
         await ctx.send(f"{msg_author.mention} g a y")
 
 
@@ -109,14 +109,14 @@ async def gay(ctx):
 async def bruh(ctx):
     messages = await ctx.channel.history(limit=2).flatten()
     msg_author = messages[1].author
-    for i in range(0, ctx.message.author.top_role.position):
+    for i in range(0, (ctx.message.author.top_role.position - 5)):
         await ctx.send(f"{msg_author.mention} b r u h")
 
 
 @bot.command()
 async def spm(ctx, *args):
     string = " ".join(args)
-    for j in range(0, ctx.message.author.top_role.position):
+    for j in range(0, (ctx.message.author.top_role.position - 5)):
         await ctx.send(string)
 
 
