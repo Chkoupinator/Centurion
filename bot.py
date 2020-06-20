@@ -229,7 +229,8 @@ async def unban(ctx):
 # Events
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the glory of ROME"))
+    await bot.CustomActivity("crying cuz tor delete messages")
+    #await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the glory of ROME"))
 
 
 @bot.event
