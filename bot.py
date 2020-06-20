@@ -243,9 +243,11 @@ async def ban(ctx, *args):
 @bot.command()
 async def unban(ctx):
     banned_users = await ctx.guild.bans()
-    for user in banned_users:
-        await ctx.guild.unban(user[1])
-        await ctx.send(f"{user[1].display_name} has been unbanned!")
+    unbanned_users = ctx.message.mentions
+    for user in unbanned_users:
+        if user in banned_users:
+            await ctx.guild.unban(user[1])
+            await ctx.send(f"{user[1].display_name} has been unbanned!")
 
 # Events
 @bot.event
