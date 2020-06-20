@@ -159,12 +159,19 @@ async def mute(ctx):
         await ctx.send("<:tucker:720181645919125535>")
 
     if ctx.message.author.top_role.position > muted_user.top_role.position and ctx.message.author.permissions_in(ctx.message.channel).manage_roles:
+        guild_roles = await ctx.guild.fetch_roles()
+        muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
+        if muted_role in guild_roles:
+            pass
+        else:
+            await ctx.guild.create_role(name="Muted")
         muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
         muted_user_roles = muted_user.roles[1:]
         for role in muted_user_roles:
             await muted_user.remove_roles(role, reason=None, atomic=True)
 
         await muted_user.add_roles(muted_role, reason=None, atomic=True)
+        await ctx.send(f"{muted_user.display_name} has been muted!")
     else:
         await ctx.send("<:harold:718791729398022184>")
 
@@ -176,10 +183,13 @@ async def unmute(ctx):
         if muted_user == bot.user:
             await ctx.send("***nta ba9lawa***")
         muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
-        plebian_role = discord.utils.get(ctx.guild.roles, name="Plebian")
         if muted_role in muted_user.roles:
             await muted_user.remove_roles(muted_role, reason=None, atomic=True)
-            await muted_user.add_roles(plebian_role, reason=None, atomic=True)
+            await ctx.send(f"{muted_user.display_name} has been unmuted!")
+
+            if ctx.guild.id == 659188268029444110:
+                plebian_role = discord.utils.get(ctx.guild.roles, name="Plebian")
+                await muted_user.add_roles(plebian_role, reason=None, atomic=True)
         else:
             await ctx.send("user needs to be muted first!")
     else:
@@ -203,7 +213,7 @@ async def kick(ctx):
             await user.kick()
     else:
         await ctx.send("<:harold:718791729398022184>")
-    
+
 
 @bot.command()
 async def ban(ctx, *args):
@@ -217,17 +227,27 @@ async def ban(ctx, *args):
         await ctx.send("<:harold:718791729398022184>")
 
 
+@bot.command()
+async def unban(ctx):
+    banned_users = await ctx.guild.bans()
+    for user in banned_users:
+        await ctx.guild.unban(user[1])
+        await ctx.send(f"{user[1].display_name} has been unbanned!")
+
 # Events
 @bot.event
 async def on_ready():
+    for guild in bot.guilds:
+        print(f"connected to {guild}")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the glory of ROME"))
 
 
 @bot.event
 async def on_member_join(member):
-    role = discord.utils.get(member.guild.roles, name="Plebian")
-    channel = bot.get_channel(659251677865443358)
-    await member.add_roles(role, reason=None, atomic=True)
+    if member.guild.id == 659188268029444110:
+        role = discord.utils.get(member.guild.roles, name="Plebian")
+        channel = bot.get_channel(659251677865443358)
+        await member.add_roles(role, reason=None, atomic=True)
     await channel.send(f"{member.mention} welcome to da clUb reeeeeeeeeee!")
 
 
