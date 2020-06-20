@@ -267,9 +267,15 @@ async def on_member_join(member):
 
 
 @bot.event
+async def on_member_ban(member):
+    return True
+
+
+@bot.event
 async def on_member_remove(member):
-    channel = bot.get_channel(659251677865443358)
-    await channel.send(f"{member.display_name} has left, what a fag lol")
+    if not on_member_ban(member):
+        channel = bot.get_channel(659251677865443358)
+        await channel.send(f"{member.display_name} has left, what a fag lol")
 
 
 @bot.event
