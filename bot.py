@@ -215,6 +215,17 @@ async def ban(ctx):
     else:
         await ctx.send("<:harold:718791729398022184>")
 
+
+@bot.command()
+async def unban(ctx):
+    if ctx.message.author.permissions_in(ctx.message.channel).ban_members:
+        banned_users = ctx.message.mentions
+        for user in banned_users:
+            await user.unban()
+            await ctx.send(f"{user.display_name} has been unbanned!")
+    else:
+        await ctx.send("<:harold:718791729398022184>")
+
 # Events
 @bot.event
 async def on_ready():
