@@ -188,7 +188,8 @@ async def unmute(ctx):
             await ctx.send(f"{muted_user.display_name} has been unmuted!")
 
             if ctx.guild.id == 659188268029444110:
-                plebian_role = discord.utils.get(ctx.guild.roles, name="Plebian")
+                plebian_role = discord.utils.get(
+                    ctx.guild.roles, name="Plebian")
                 await muted_user.add_roles(plebian_role, reason=None, atomic=True)
         else:
             await ctx.send("user needs to be muted first!")
@@ -209,8 +210,11 @@ async def kick(ctx):
     if ctx.message.author.permissions_in(ctx.message.channel).kick_members:
         kicked_users = ctx.message.mentions
         for user in kicked_users:
-            await ctx.send(f"{user.display_name} has been kicked!")
-            await user.kick()
+            if ctx.message.author.top_role.position > user.top_role.position:
+                await ctx.send(f"{user.display_name} has been kicked!")
+                await user.kick()
+            else:
+                await ctx.send("<:harold:718791729398022184>")
     else:
         await ctx.send("<:harold:718791729398022184>")
 
@@ -221,8 +225,11 @@ async def ban(ctx, *args):
         reason = " ".join(args[1:])
         banned_users = ctx.message.mentions
         for user in banned_users:
-            await ctx.send(f"{user.display_name} has been banned!")
-            await user.ban(reason=reason)
+            if ctx.message.author.top_role.position > user.top_role.position:
+                await ctx.send(f"{user.display_name} has been banned!")
+                await user.ban(reason=reason)
+            else:
+                await ctx.send("<:harold:718791729398022184>")
     else:
         await ctx.send("<:harold:718791729398022184>")
 
