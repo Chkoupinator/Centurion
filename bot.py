@@ -199,8 +199,8 @@ async def kick(ctx):
     if ctx.message.author.permissions_in(ctx.message.channel).kick_members:
         kicked_users = ctx.message.mentions
         for user in kicked_users:
-            await user.kick()
             await ctx.send(f"{user.display_name} has been kicked!")
+            await user.kick()
     else:
         await ctx.send("<:harold:718791729398022184>")
     
