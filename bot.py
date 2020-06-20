@@ -210,9 +210,12 @@ async def kick(ctx):
     if ctx.message.author.permissions_in(ctx.message.channel).kick_members:
         kicked_users = ctx.message.mentions
         for user in kicked_users:
-            if ctx.message.author.top_role.position > user.top_role.position:
-                await ctx.send(f"{user.display_name} has been kicked!")
-                await user.kick()
+            if not user == bot.user:
+                if ctx.message.author.top_role.position > user.top_role.position:
+                    await ctx.send(f"{user.display_name} has been kicked!")
+                    await user.kick()
+                else:
+                    await ctx.send("<:harold:718791729398022184>")
             else:
                 await ctx.send("<:harold:718791729398022184>")
     else:
@@ -225,9 +228,12 @@ async def ban(ctx, *args):
         reason = " ".join(args[1:])
         banned_users = ctx.message.mentions
         for user in banned_users:
-            if ctx.message.author.top_role.position > user.top_role.position:
-                await ctx.send(f"{user.display_name} has been banned!")
-                await user.ban(reason=reason)
+            if not user == bot.user:
+                if ctx.message.author.top_role.position > user.top_role.position:
+                    await ctx.send(f"{user.display_name} has been banned!")
+                    await user.ban(reason=reason)
+                else:
+                    await ctx.send("<:harold:718791729398022184>")
             else:
                 await ctx.send("<:harold:718791729398022184>")
     else:
