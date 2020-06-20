@@ -121,7 +121,7 @@ async def spm(ctx, *args):
 
 
 @bot.command()
-async def delete(ctx, arg):
+async def dlt(ctx, arg):
     if ctx.message.author.permissions_in(ctx.message.channel).manage_messages:
         await ctx.message.channel.purge(limit=int(arg))
     else:
