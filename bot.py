@@ -206,25 +206,16 @@ async def kick(ctx):
     
 
 @bot.command()
-async def ban(ctx):
+async def ban(ctx, *args):
     if ctx.message.author.permissions_in(ctx.message.channel).ban_members:
+        reason = " ".join(args[1:])
         banned_users = ctx.message.mentions
         for user in banned_users:
             await ctx.send(f"{user.display_name} has been banned!")
-            await user.ban()
+            await user.ban(reason=reason)
     else:
         await ctx.send("<:harold:718791729398022184>")
 
-
-@bot.command()
-async def unban(ctx):
-    if ctx.message.author.permissions_in(ctx.message.channel).ban_members:
-        banned_users = ctx.message.mentions
-        for user in banned_users:
-            await user.unban()
-            await ctx.send(f"{user} has been unbanned!")
-    else:
-        await ctx.send("<:harold:718791729398022184>")
 
 # Events
 @bot.event
