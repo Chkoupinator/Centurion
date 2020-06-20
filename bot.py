@@ -191,7 +191,19 @@ async def chill(ctx, arg):
     if ctx.message.author.permissions_in(ctx.message.channel).manage_channels:
         await ctx.channel.edit(slowmode_delay=int(arg))
     else:
-        await ctx.send("<:harold:718791729398022184>") 
+        await ctx.send("<:harold:718791729398022184>")
+
+
+@bot.command()
+async def kick(ctx):
+    if ctx.message.author.permissions_in(ctx.message.channel).kick_members:
+        kicked_users = ctx.message.mentions
+        for user in kicked_users:
+            await user.kick()
+            await ctx.send(f"{user.display_name} has been kicked!")
+    else:
+        await ctx.send("<:harold:718791729398022184>")
+    
 
 # Events
 @bot.event
