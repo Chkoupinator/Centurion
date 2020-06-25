@@ -1,11 +1,14 @@
 import discord
 from discord.ext import commands
 import time
-from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_forbidden_words_joke, check_pp_size, get_dad_joke
+from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_forbidden_words_joke, check_pp_size, \
+    get_dad_joke
 
 prefix = '$'
 token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
 bot = commands.Bot(command_prefix=prefix)
+
+forbidden_words_list = []
 
 
 # Commands
@@ -158,7 +161,8 @@ async def mute(ctx):
     if muted_user == bot.user:
         await ctx.send("<:tucker:720181645919125535>")
 
-    if ctx.message.author.top_role.position > muted_user.top_role.position and ctx.message.author.permissions_in(ctx.message.channel).manage_roles:
+    if ctx.message.author.top_role.position > muted_user.top_role.position and ctx.message.author.permissions_in(
+            ctx.message.channel).manage_roles:
         guild_roles = await ctx.guild.fetch_roles()
         muted_role = discord.utils.get(ctx.guild.roles, name="Muted")
         if muted_role in guild_roles:
@@ -249,6 +253,7 @@ async def unban(ctx):
             await ctx.guild.unban(user[1])
             await ctx.send(f"{user[1].display_name} has been unbanned!")
 
+
 # Events
 @bot.event
 async def on_ready():
@@ -273,7 +278,6 @@ async def on_member_ban(member):
 
 @bot.event
 async def on_member_remove(member):
-
     if not (on_member_ban(member)):
         channel = bot.get_channel(659251677865443358)
         await channel.send(f"{member.display_name} has left, what a fag lol")
@@ -284,12 +288,16 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if not message.content.startswith(prefix):
-        forbidden_words_channel = bot.get_channel(717897450337075260)
+    if len(forbidden_words_list) == 0 or message.channel.id == 717897450337075260:    
+        # checks if message is in the forbidden words channel or if the forbidden words list hasn't been populated yet
+        # and refreshes it only when it is actually needed to refresh it
+        forbidden_words_channel = message.channel
         arr = await forbidden_words_channel.history(limit=100).flatten()
-        forbidden_words_list = []
         for i in arr:
             forbidden_words_list.append(i.content)
+
+
+    if not message.content.startswith(prefix):
         check = check_stupid(message.content.lower(), forbidden_words_list)
         if check:
             joke = get_forbidden_words_joke()
