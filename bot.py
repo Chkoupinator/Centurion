@@ -286,9 +286,15 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    if len(forbidden_words_list) == 0 or message.channel.id == 717897450337075260:
-        # checks if message is in the forbidden words channel or if the forbidden words list hasn't been populated yet
-        # and refreshes it only when it is actually needed to refresh it
+    if len(forbidden_words_list) == 0:
+        # checks if the forbidden words list hasn't been populated yet
+        forbidden_words_channel = bot.get_channel(717897450337075260)
+        arr = await forbidden_words_channel.history(limit=1000).flatten()
+        for i in arr:
+            forbidden_words_list.append(i.content)
+
+    elif message.channel.id == 717897450337075260:
+        # checks if message is in the forbidden words channel and refreshes it only when it is actually needed to refresh it
         arr = await message.channel.history(limit=100).flatten()
         for i in arr:
             forbidden_words_list.append(i.content)
