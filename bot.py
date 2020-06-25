@@ -9,13 +9,6 @@ token = os.environ['TOKEN']
 bot = commands.Bot(command_prefix=prefix)
 forbidden_words_list = []
 
-async def update_forbidden_words_arr():
-    forbidden_words_channel = bot.get_channel(717897450337075260)
-    arr = await forbidden_words_channel.history(limit=1000).flatten()
-    for i in arr:
-        forbidden_words_list.append(i.content)
-
-
 
 # Commands
 @bot.command()
@@ -264,7 +257,6 @@ async def on_ready():
     for guild in bot.guilds:
         print(f"connected to {guild}")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the glory of ROME"))
-    await update_forbidden_words_arr()
 
 
 @bot.event
@@ -294,6 +286,14 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
+    if len(forbidden_words_list) == 0 or message.channel.id == 717897450337075260:
+        # checks if message is in the forbidden words channel or if the forbidden words list hasn't been populated yet
+        # and refreshes it only when it is actually needed to refresh it
+        arr = await message.channel.history(limit=100).flatten()
+        for i in arr:
+            forbidden_words_list.append(i.content)
+
+    
     if not message.content.startswith(prefix):
         check = check_stupid(message.content.lower(), forbidden_words_list)
         if check:
