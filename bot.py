@@ -264,7 +264,7 @@ async def on_ready():
     for guild in bot.guilds:
         print(f"connected to {guild}")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the glory of ROME"))
-    update_forbidden_words_arr()
+    await update_forbidden_words_arr()
 
 
 @bot.event
