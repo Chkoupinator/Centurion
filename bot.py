@@ -1,11 +1,20 @@
 import discord
+import os
 from discord.ext import commands
 import time
 from functions import get_url, get_url_v2, get_url_v3, check_stupid, get_forbidden_words_joke, check_pp_size, get_dad_joke
 
 prefix = '$'
-token = "NzE3NTYzNDU5ODUxNzgwMjA4.XtcJMQ.j4rmyW2szEfgRTBBj6f5TAlE4KI"
+token = os.environ['TOKEN']
 bot = commands.Bot(command_prefix=prefix)
+forbidden_words_list = []
+
+async def update_forbidden_words_arr():
+    forbidden_words_channel = bot.get_channel(717897450337075260)
+    arr = await forbidden_words_channel.history(limit=1000).flatten()
+    for i in arr:
+        forbidden_words_list.append(i.content)
+
 
 
 # Commands
@@ -255,6 +264,7 @@ async def on_ready():
     for guild in bot.guilds:
         print(f"connected to {guild}")
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="the glory of ROME"))
+    update_forbidden_words_arr()
 
 
 @bot.event
@@ -285,11 +295,6 @@ async def on_message(message):
         return
 
     if not message.content.startswith(prefix):
-        forbidden_words_channel = bot.get_channel(717897450337075260)
-        arr = await forbidden_words_channel.history(limit=100).flatten()
-        forbidden_words_list = []
-        for i in arr:
-            forbidden_words_list.append(i.content)
         check = check_stupid(message.content.lower(), forbidden_words_list)
         if check:
             joke = get_forbidden_words_joke()
